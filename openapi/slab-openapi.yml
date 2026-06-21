@@ -1,0 +1,153 @@
+openapi: 3.0.1
+info:
+  title: Slab GraphQL API
+  description: >-
+    HTTP transport for the Slab GraphQL API. Slab exposes a single GraphQL
+    endpoint at https://api.slab.com/v1/graphql accessed via HTTP POST with a
+    JSON body containing a `query` and optional `variables`. Authentication uses
+    an `Authorization` token generated in Team Settings -> Developer Tools. The
+    API is available to Business and Enterprise customers and returns only
+    content accessible to the Slab Bot user.
+  termsOfService: https://slab.com/terms
+  contact:
+    name: Slab Support
+    url: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+  version: '1.0'
+servers:
+  - url: https://api.slab.com
+paths:
+  /v1/graphql:
+    post:
+      operationId: postGraphql
+      tags:
+        - GraphQL
+      summary: Execute a Slab GraphQL operation.
+      description: >-
+        Execute any Slab GraphQL query or mutation. Send a JSON body with a
+        `query` string and optional `variables` object. Supported operations
+        include `post`, `posts`, `search`, `topic`, `topics`, `user`, `users`,
+        and `organization` queries, and the `updatePost` mutation. Content is
+        represented in the Quill Delta format.
+      security:
+        - SlabToken: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+            examples:
+              getPost:
+                summary: Fetch a post by ID
+                value:
+                  query: >-
+                    query GetPost($id: ID!) { post(id: $id) { id title content
+                    insertedAt updatedAt topics { id name } } }
+                  variables:
+                    id: "abc123"
+              listPosts:
+                summary: List organization posts with cursor pagination
+                value:
+                  query: >-
+                    query GetOrganizationPosts($first: Int!, $after: String) {
+                    posts(first: $first, after: $after) { edges { node { id
+                    title } cursor } pageInfo { hasNextPage endCursor } } }
+                  variables:
+                    first: 50
+                    after: null
+              searchPosts:
+                summary: Search posts
+                value:
+                  query: >-
+                    query SearchPosts($query: String!, $first: Int!) {
+                    search(query: $query, first: $first) { edges { node { id
+                    title } } pageInfo { hasNextPage endCursor } } }
+                  variables:
+                    query: "onboarding"
+                    first: 25
+              updatePost:
+                summary: Update post content (Quill Delta)
+                value:
+                  query: >-
+                    mutation UpdatePostContent($id: ID!, $content: JSON!) {
+                    updatePost(id: $id, content: $content) { id version
+                    updatedAt } }
+                  variables:
+                    id: "abc123"
+                    content:
+                      ops:
+                        - insert: "Hello world\n"
+      responses:
+        '200':
+          description: >-
+            A GraphQL response. Note that GraphQL returns HTTP 200 even for
+            operations that produce field-level `errors`; inspect the `errors`
+            array in the body.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+        '401':
+          description: Missing or invalid Authorization token.
+        '403':
+          description: >-
+            Token is valid but the account is not on a Business or Enterprise
+            plan, or the Slab Bot lacks access to the requested content.
+        '429':
+          description: Too many requests; the client is being rate limited.
+components:
+  securitySchemes:
+    SlabToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: >-
+        API token generated in Slab under Team Settings -> Developer Tools,
+        sent in the Authorization header.
+  schemas:
+    GraphQLRequest:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The GraphQL query or mutation document.
+        operationName:
+          type: string
+          description: Name of the operation to run when the document defines several.
+        variables:
+          type: object
+          additionalProperties: true
+          description: Key/value map of variables referenced by the operation.
+    GraphQLResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          additionalProperties: true
+          nullable: true
+          description: Result data keyed by the requested fields.
+        errors:
+          type: array
+          description: Field- or request-level errors, if any.
+          items:
+            $ref: '#/components/schemas/GraphQLError'
+    GraphQLError:
+      type: object
+      properties:
+        message:
+          type: string
+        path:
+          type: array
+          items:
+            type: string
+        locations:
+          type: array
+          items:
+            type: object
+            properties:
+              line:
+                type: integer
+              column:
+                type: integer

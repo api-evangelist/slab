@@ -1,0 +1,123 @@
+aid: slab
+url: https://raw.githubusercontent.com/api-evangelist/slab/refs/heads/main/apis.yml
+name: Slab
+kind: company
+description: Slab is an internal knowledge base and team wiki for the modern workplace,
+  pairing a clean editor and fast search with dozens of integrations. Slab exposes
+  a single GraphQL API at https://api.slab.com/v1/graphql for programmatic access to
+  posts, topics, users, and organization data, available to Business and Enterprise
+  customers.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Knowledge Base
+- Wiki
+- Documentation
+- Collaboration
+- GraphQL
+created: '2026-06-21'
+modified: '2026-06-21'
+specificationVersion: '0.19'
+apis:
+- aid: slab:posts
+  name: Slab Posts
+  tags:
+  - Posts
+  - Content
+  - GraphQL
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+  baseURL: https://api.slab.com/v1/graphql
+  properties:
+  - url: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+    type: Documentation
+  - url: https://studio.apollographql.com/public/Slab/variant/current/schema/reference
+    type: APIReference
+  - url: graphql/slab-graphql.md
+    type: GraphQL
+  - url: openapi/slab-openapi.yml
+    type: OpenAPI
+  description: Query and update knowledge base posts through the Slab GraphQL API -
+    fetch a post by ID, search posts across the workspace with cursor-based pagination,
+    list posts within a topic or across the organization, and update post content
+    using the Quill Delta rich-text format.
+- aid: slab:topics
+  name: Slab Topics
+  tags:
+  - Topics
+  - Organization
+  - GraphQL
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+  baseURL: https://api.slab.com/v1/graphql
+  properties:
+  - url: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+    type: Documentation
+  - url: https://studio.apollographql.com/public/Slab/variant/current/schema/reference
+    type: APIReference
+  - url: graphql/slab-graphql.md
+    type: GraphQL
+  - url: openapi/slab-openapi.yml
+    type: OpenAPI
+  description: Read the topic hierarchy used to organize content in a Slab workspace,
+    resolve a topic by ID, and list the posts nested within a topic. Topics are the
+    primary structure for grouping and navigating knowledge base content.
+- aid: slab:users
+  name: Slab Users
+  tags:
+  - Users
+  - Members
+  - GraphQL
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+  baseURL: https://api.slab.com/v1/graphql
+  properties:
+  - url: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+    type: Documentation
+  - url: https://studio.apollographql.com/public/Slab/variant/current/schema/reference
+    type: APIReference
+  - url: graphql/slab-graphql.md
+    type: GraphQL
+  - url: openapi/slab-openapi.yml
+    type: OpenAPI
+  description: Resolve the members of a Slab organization through the GraphQL API -
+    look up a user by ID and read profile fields such as name and email, used to attribute
+    authorship and map activity to people.
+- aid: slab:organization
+  name: Slab Organization
+  tags:
+  - Organization
+  - Account
+  - GraphQL
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+  baseURL: https://api.slab.com/v1/graphql
+  properties:
+  - url: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+    type: Documentation
+  - url: https://studio.apollographql.com/public/Slab/variant/current/schema/reference
+    type: APIReference
+  - url: graphql/slab-graphql.md
+    type: GraphQL
+  - url: openapi/slab-openapi.yml
+    type: OpenAPI
+  description: Read top-level organization (workspace) context through the Slab GraphQL
+    API, including the organization entry point that scopes posts, topics, and users.
+    API responses are bounded by what the Slab Bot user can access in the workspace.
+common:
+- type: GitHubOrganization
+  url: https://github.com/slab
+- type: LinkedIn
+  url: https://www.linkedin.com/company/slab-inc
+- type: Website
+  url: https://slab.com/
+- type: Documentation
+  url: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+- type: Plans
+  url: plans/slab-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/slab-rate-limits.yml
+- type: FinOps
+  url: finops/slab-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

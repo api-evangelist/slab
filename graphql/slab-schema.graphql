@@ -1,0 +1,157 @@
+"""
+Slab GraphQL Schema (representative)
+
+Single GraphQL endpoint: https://api.slab.com/v1/graphql
+Transport: HTTP POST, JSON body { query, variables }, Authorization: <token> header.
+Plan requirement: Business or Enterprise. Responses scoped to Slab Bot permissions.
+
+This SDL is a REPRESENTATIVE reconstruction from Slab's public developer
+documentation, the public Apollo Studio schema reference, and community
+integrations. Operation and field names model the documented surface; it is not a
+copy of a published SDL file.
+
+Source: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+        https://studio.apollographql.com/public/Slab/variant/current/schema/reference
+"""
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar DateTime
+scalar JSON
+
+# ---------------------------------------------------------------------------
+# Pagination (Relay-style cursor connections)
+# ---------------------------------------------------------------------------
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# ---------------------------------------------------------------------------
+# Organization
+# ---------------------------------------------------------------------------
+
+"""Top-level workspace; entry point that scopes posts, topics, and users."""
+type Organization {
+  id: ID!
+  name: String
+  posts(first: Int, after: String): PostConnection
+  topics(first: Int, after: String): TopicConnection
+  users(first: Int, after: String): UserConnection
+}
+
+# ---------------------------------------------------------------------------
+# Post
+# ---------------------------------------------------------------------------
+
+"""A knowledge base post. Content is represented in the Quill Delta format (JSON)."""
+type Post {
+  id: ID!
+  title: String
+  """Quill Delta rich-text content payload."""
+  content: JSON
+  version: Int
+  insertedAt: DateTime
+  updatedAt: DateTime
+  owner: User
+  topics: [Topic!]
+}
+
+type PostConnection {
+  edges: [PostEdge!]!
+  pageInfo: PageInfo!
+}
+
+type PostEdge {
+  node: Post!
+  cursor: String!
+}
+
+# ---------------------------------------------------------------------------
+# Topic
+# ---------------------------------------------------------------------------
+
+"""A content grouping used to organize and navigate posts in a workspace."""
+type Topic {
+  id: ID!
+  name: String
+  description: String
+  parent: Topic
+  posts(first: Int, after: String): PostConnection
+}
+
+type TopicConnection {
+  edges: [TopicEdge!]!
+  pageInfo: PageInfo!
+}
+
+type TopicEdge {
+  node: Topic!
+  cursor: String!
+}
+
+# ---------------------------------------------------------------------------
+# User
+# ---------------------------------------------------------------------------
+
+"""An organization member."""
+type User {
+  id: ID!
+  name: String
+  email: String
+}
+
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+# ---------------------------------------------------------------------------
+# Root operations
+# ---------------------------------------------------------------------------
+
+type Query {
+  """Fetch the current workspace/organization context."""
+  organization: Organization
+
+  """Retrieve a single post by ID, including Quill Delta content."""
+  post(id: ID!): Post
+
+  """List posts across the organization with cursor pagination."""
+  posts(first: Int, after: String): PostConnection
+
+  """Search posts across the workspace."""
+  search(query: String!, first: Int, after: String): PostConnection
+
+  """Retrieve a single topic by ID."""
+  topic(id: ID!): Topic
+
+  """List topics in the organization."""
+  topics(first: Int, after: String): TopicConnection
+
+  """Retrieve a single user by ID."""
+  user(id: ID!): User
+
+  """List users (members) in the organization."""
+  users(first: Int, after: String): UserConnection
+}
+
+type Mutation {
+  """Update a post's content using the Quill Delta format."""
+  updatePost(id: ID!, content: JSON!): Post
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

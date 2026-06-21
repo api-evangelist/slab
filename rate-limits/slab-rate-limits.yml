@@ -1,0 +1,62 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Slab
+providerId: slab
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Knowledge Base
+- Wiki
+- Documentation
+- Collaboration
+- GraphQL
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Slab serves a single GraphQL endpoint (https://api.slab.com/v1/graphql) for
+  Business and Enterprise customers. Slab does not publish specific numeric rate
+  limits in its public developer documentation; large reads are expected to use
+  cursor-based pagination rather than bulk export, and clients should handle HTTP
+  429 responses with backoff. Specific per-account limits are not reconciled in
+  this artifact.
+notes: >-
+  Slab's public docs do not state explicit RPS/RPM numbers. Confirm any
+  account-level or per-token limits with Slab support during reconciliation.
+  Effective throughput is also bounded by what the Slab Bot user can access.
+sources:
+- https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+- https://studio.apollographql.com/public/Slab/variant/current/schema/reference
+responseCodes:
+  throttled: 429
+limits:
+- name: GraphQL Requests
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: No published numeric limit; throttling surfaces as HTTP 429.
+- name: Search / List Pagination
+  scope: account
+  metric: results
+  limit: cursor-based
+  notes: >-
+    Posts, topics, and users are returned via cursor-paginated connections
+    (edges/pageInfo); there is no bulk export endpoint.
+policies:
+- name: Cursor Pagination
+  description: >-
+    Page through large result sets with first/after cursors and follow
+    pageInfo.endCursor until hasNextPage is false.
+- name: Backoff Strategy
+  description: >-
+    Implement exponential backoff with jitter on HTTP 429 and honor any
+    Retry-After header.
+- name: Bot Access Scope
+  description: >-
+    Responses are limited to content the Slab Bot user can access; add Slab Bot
+    to private topics to make their content visible to the API.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

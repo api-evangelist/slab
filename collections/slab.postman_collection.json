@@ -1,0 +1,193 @@
+{
+  "info": {
+    "name": "Slab GraphQL API",
+    "description": "Slab knowledge base GraphQL API. Single endpoint at https://api.slab.com/v1/graphql, accessed via HTTP POST with a JSON body ({ query, variables }) and an Authorization token from Team Settings -> Developer Tools. Available to Business and Enterprise customers.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{slabToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.slab.com/v1/graphql"
+    },
+    {
+      "key": "slabToken",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Get a post by ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query GetPost($id: ID!) {\n  post(id: $id) {\n    id\n    title\n    content\n    insertedAt\n    updatedAt\n    topics { id name }\n  }\n}",
+                "variables": "{\n  \"id\": \"abc123\"\n}"
+              }
+            },
+            "description": "Retrieve a single post, including its Quill Delta content, by ID."
+          }
+        },
+        {
+          "name": "List organization posts (cursor pagination)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query GetOrganizationPosts($first: Int!, $after: String) {\n  posts(first: $first, after: $after) {\n    edges {\n      node { id title insertedAt updatedAt }\n      cursor\n    }\n    pageInfo { hasNextPage endCursor }\n  }\n}",
+                "variables": "{\n  \"first\": 50,\n  \"after\": null\n}"
+              }
+            },
+            "description": "List posts across the organization using cursor-based pagination."
+          }
+        },
+        {
+          "name": "Search posts",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query SearchPosts($query: String!, $first: Int!) {\n  search(query: $query, first: $first) {\n    edges { node { id title } }\n    pageInfo { hasNextPage endCursor }\n  }\n}",
+                "variables": "{\n  \"query\": \"onboarding\",\n  \"first\": 25\n}"
+              }
+            },
+            "description": "Search posts across the workspace."
+          }
+        },
+        {
+          "name": "Update post content (Quill Delta)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "mutation UpdatePostContent($id: ID!, $content: JSON!) {\n  updatePost(id: $id, content: $content) {\n    id\n    version\n    updatedAt\n  }\n}",
+                "variables": "{\n  \"id\": \"abc123\",\n  \"content\": { \"ops\": [ { \"insert\": \"Hello world\\n\" } ] }\n}"
+              }
+            },
+            "description": "Update a post's content using the Quill Delta rich-text format."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Topics",
+      "item": [
+        {
+          "name": "Get a topic and its posts",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query GetTopicPosts($id: ID!) {\n  topic(id: $id) {\n    id\n    name\n    posts(first: 50) {\n      edges { node { id title } }\n      pageInfo { hasNextPage endCursor }\n    }\n  }\n}",
+                "variables": "{\n  \"id\": \"topic123\"\n}"
+              }
+            },
+            "description": "Resolve a topic by ID and list the posts nested within it."
+          }
+        },
+        {
+          "name": "List topics",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query GetTopics($first: Int!, $after: String) {\n  topics(first: $first, after: $after) {\n    edges { node { id name description } }\n    pageInfo { hasNextPage endCursor }\n  }\n}",
+                "variables": "{\n  \"first\": 50,\n  \"after\": null\n}"
+              }
+            },
+            "description": "List topics in the organization with cursor pagination."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get a user by ID",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query GetUser($id: ID!) {\n  user(id: $id) {\n    id\n    name\n    email\n  }\n}",
+                "variables": "{\n  \"id\": \"user123\"\n}"
+              }
+            },
+            "description": "Retrieve a single organization member by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Organization",
+      "item": [
+        {
+          "name": "Get the organization context",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "{{baseUrl}}", "host": ["{{baseUrl}}"] },
+            "body": {
+              "mode": "graphql",
+              "graphql": {
+                "query": "query GetOrganization {\n  organization {\n    id\n    name\n  }\n}",
+                "variables": "{}"
+              }
+            },
+            "description": "Fetch the current workspace/organization context."
+          }
+        }
+      ]
+    }
+  ]
+}

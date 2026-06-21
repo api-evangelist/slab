@@ -1,0 +1,76 @@
+aid: slab
+name: Slab
+review:
+  question: Does Slab expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-21'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Slab's only documented programmatic
+    surface is a synchronous GraphQL-over-HTTP endpoint. There is no
+    Server-Sent Events (SSE) stream or WebSocket subscription transport
+    documented, so nothing is in scope for AsyncAPI modeling. Slab does
+    offer outbound HTTP webhooks, which are an event-notification mechanism
+    over HTTP POST callbacks rather than a client-facing streaming API.
+findings:
+  summary: |
+    Slab does not publish a documented public WebSocket API. The Slab
+    developer surface is a single GraphQL endpoint at
+    https://api.slab.com/v1/graphql, accessed over HTTPS via HTTP POST with
+    a JSON body ({ query, variables }) and an Authorization token generated
+    in Team Settings -> Developer Tools. The API is gated to Business and
+    Enterprise customers and returns only content the Slab Bot user can
+    access. No GraphQL subscription operation, SSE stream, or wss:// endpoint
+    is documented. Slab provides outbound webhooks for event notifications,
+    but those are server-to-server HTTP callbacks, not a WebSocket transport.
+  transports:
+    - protocol: GraphQL
+      scheme: https
+      baseURL: https://api.slab.com/v1/graphql
+      documented: true
+      note: Single GraphQL endpoint; queries and mutations over HTTP POST.
+    - protocol: Webhooks
+      scheme: https
+      documented: true
+      note: Outbound HTTP POST event callbacks configured in Developer Tools. Not a client-facing streaming API.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Slab's developer docs or public schema reference as of the review date.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events stream and no GraphQL subscription operation are documented.
+  operationsConfirmedGraphql:
+    - POST https://api.slab.com/v1/graphql (query post)
+    - POST https://api.slab.com/v1/graphql (query posts)
+    - POST https://api.slab.com/v1/graphql (query search)
+    - POST https://api.slab.com/v1/graphql (query topic)
+    - POST https://api.slab.com/v1/graphql (query topics)
+    - POST https://api.slab.com/v1/graphql (query user)
+    - POST https://api.slab.com/v1/graphql (query users)
+    - POST https://api.slab.com/v1/graphql (query organization)
+    - POST https://api.slab.com/v1/graphql (mutation updatePost)
+sources:
+  - url: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+    type: Documentation
+    note: Developer Tools page; documents the GraphQL API, token auth, webhooks, and Business/Enterprise gating. No WebSocket mentioned.
+  - url: https://studio.apollographql.com/public/Slab/variant/current/schema/reference
+    type: APIReference
+    note: Public Apollo Studio schema reference for the Slab graph; query/mutation operations only, no subscription transport documented.
+  - url: https://api.slab.com/v1/graphql
+    type: APIReference
+    note: The single GraphQL HTTP endpoint; all operations are POST over HTTPS.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE/subscription protocol surface exists, so no AsyncAPI
+    document was authored. The apis.yml models the GraphQL transport for the
+    Posts, Topics, Users, and Organization APIs with graphql/slab-graphql.md
+    and openapi/slab-openapi.yml, accurately representing the synchronous
+    GraphQL-over-HTTP transport without misrepresenting it as realtime.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Slab GraphQL API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{slabToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Posts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a post by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.slab.com/v1/graphql",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"query GetPost($id: ID!) { post(id: $id) { id title content insertedAt updatedAt topics { id name } } }\",\n  \"variables\": { \"id\": \"abc123\" }\n}"
+            }
+          },
+          "docs": "Retrieve a single post, including its Quill Delta content, by ID."
+        },
+        {
+          "info": {
+            "name": "List organization posts (cursor pagination).",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.slab.com/v1/graphql",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"query GetOrganizationPosts($first: Int!, $after: String) { posts(first: $first, after: $after) { edges { node { id title insertedAt updatedAt } cursor } pageInfo { hasNextPage endCursor } } }\",\n  \"variables\": { \"first\": 50, \"after\": null }\n}"
+            }
+          },
+          "docs": "List posts across the organization using cursor-based pagination."
+        },
+        {
+          "info": {
+            "name": "Search posts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.slab.com/v1/graphql",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"query SearchPosts($query: String!, $first: Int!) { search(query: $query, first: $first) { edges { node { id title } } pageInfo { hasNextPage endCursor } } }\",\n  \"variables\": { \"query\": \"onboarding\", \"first\": 25 }\n}"
+            }
+          },
+          "docs": "Search posts across the workspace."
+        },
+        {
+          "info": {
+            "name": "Update post content (Quill Delta).",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.slab.com/v1/graphql",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"mutation UpdatePostContent($id: ID!, $content: JSON!) { updatePost(id: $id, content: $content) { id version updatedAt } }\",\n  \"variables\": { \"id\": \"abc123\", \"content\": { \"ops\": [ { \"insert\": \"Hello world\\n\" } ] } }\n}"
+            }
+          },
+          "docs": "Update a post's content using the Quill Delta rich-text format."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Topics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a topic and its posts.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.slab.com/v1/graphql",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"query GetTopicPosts($id: ID!) { topic(id: $id) { id name posts(first: 50) { edges { node { id title } } pageInfo { hasNextPage endCursor } } } }\",\n  \"variables\": { \"id\": \"topic123\" }\n}"
+            }
+          },
+          "docs": "Resolve a topic by ID and list the posts nested within it."
+        },
+        {
+          "info": {
+            "name": "List topics.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.slab.com/v1/graphql",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"query GetTopics($first: Int!, $after: String) { topics(first: $first, after: $after) { edges { node { id name description } } pageInfo { hasNextPage endCursor } } }\",\n  \"variables\": { \"first\": 50, \"after\": null }\n}"
+            }
+          },
+          "docs": "List topics in the organization with cursor pagination."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a user by ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.slab.com/v1/graphql",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"query GetUser($id: ID!) { user(id: $id) { id name email } }\",\n  \"variables\": { \"id\": \"user123\" }\n}"
+            }
+          },
+          "docs": "Retrieve a single organization member by ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Organization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the organization context.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.slab.com/v1/graphql",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"query\": \"query GetOrganization { organization { id name } }\"\n}"
+            }
+          },
+          "docs": "Fetch the current workspace/organization context."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

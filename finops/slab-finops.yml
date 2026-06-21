@@ -1,0 +1,93 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Slab
+providerId: slab
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Knowledge Base
+- Wiki
+- Documentation
+- Collaboration
+- GraphQL
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Slab spend. Slab is billed as a per-seat SaaS subscription
+  rather than per-API-call. The GraphQL API does not carry its own metered
+  usage charge; instead it is unlocked by the Business and Enterprise plans.
+  Cost optimization therefore centers on seat management (active vs. provisioned
+  users) and choosing the right plan tier for the features needed, including API
+  access.
+notes: >-
+  Per-seat dollar amounts are subject to change; verify against the Slab pricing
+  page during reconciliation. There is no published per-request API price.
+sources:
+- https://slab.com/pricing/
+- https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Slab
+serviceCategory: Collaboration and Productivity
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Adjustment
+focusColumns:
+  ServiceName: Slab
+  ServiceCategory: Collaboration and Productivity
+  ProviderName: Slab
+  PublisherName: Slab
+  InvoiceIssuerName: Slab
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription-Based
+meters:
+- name: seats
+  description: Provisioned user seats billed per the subscribed plan tier.
+  unit: users
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: plan_tier
+  description: >-
+    Subscription tier (Free, Startup, Business, Enterprise) determining feature
+    access including GraphQL API and webhooks.
+  unit: tier
+  aggregation: max
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: >-
+    Track provisioned vs. active seats and which plan tier is in effect; API
+    access is a plan feature, not a separate metered line item.
+- name: Allocation
+  description: >-
+    Map Slab seats to teams/departments and the value of API-driven workflows
+    they enable.
+- name: Optimization
+  description: >-
+    Deprovision inactive seats, right-size the plan tier (only step up to
+    Business/Enterprise when API/webhook access is actually needed), and use
+    cursor pagination to avoid redundant API reads.
+- name: Accountability
+  description: >-
+    Assign an owner for the Slab subscription and review seat count and tier
+    against budget on each billing cycle.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

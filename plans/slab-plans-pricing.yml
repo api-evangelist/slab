@@ -1,0 +1,116 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Slab
+providerId: slab
+created: '2026-06-21'
+modified: '2026-06-21'
+reconciled: false
+tags:
+- Knowledge Base
+- Wiki
+- Documentation
+- Collaboration
+- GraphQL
+- Plans
+description: >-
+  Slab is sold as a per-user SaaS subscription with Free, Startup, Business, and
+  Enterprise tiers. The GraphQL API and webhooks are gated to the Business and
+  Enterprise plans; lower tiers do not include programmatic API access. Per-seat
+  pricing is published on the Slab pricing page and is subject to change, so
+  specific per-seat dollar amounts are not reconciled in this artifact.
+notes: >-
+  Verify current per-seat prices and seat minimums on the Slab pricing page
+  during reconciliation. API access requires Business or Enterprise.
+sources:
+- https://slab.com/pricing/
+- https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
+plans:
+- id: slab-free
+  name: Free
+  type: free
+  description: >-
+    Entry tier for small teams with core knowledge base and editor features.
+    Does not include GraphQL API or webhook access.
+  entries:
+  - label: Seats
+    name: seats
+    type: free
+    metric: users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: $0
+    userMultiplied: true
+  elements:
+  - name: Editor
+  - name: Search
+- id: slab-startup
+  name: Startup
+  type: paid
+  description: >-
+    Paid per-seat tier with expanded limits and integrations. Does not include
+    GraphQL API or webhook access.
+  entries:
+  - label: Per Seat
+    name: per_seat
+    type: flat
+    metric: users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: see Slab pricing page
+    userMultiplied: true
+  elements:
+  - name: Integrations
+  - name: Unlimited Posts
+- id: slab-business
+  name: Business
+  type: paid
+  description: >-
+    Per-seat tier that unlocks the GraphQL API and webhooks, plus advanced
+    administration and analytics.
+  entries:
+  - label: Per Seat
+    name: per_seat
+    type: flat
+    metric: users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: see Slab pricing page
+    userMultiplied: true
+  elements:
+  - name: GraphQL API
+  - name: Webhooks
+  - name: Analytics
+  - name: Advanced Admin
+- id: slab-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Negotiated plan with SSO/SAML, advanced security and compliance, dedicated
+    support, and full GraphQL API and webhook access. Contact Slab sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: GraphQL API
+  - name: Webhooks
+  - name: SSO / SAML
+  - name: Advanced Security
+  - name: Dedicated Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
