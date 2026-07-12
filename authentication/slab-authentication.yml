@@ -1,0 +1,17 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/slab-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: SlabToken
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: API token generated in Slab under Team Settings -> Developer Tools, sent in the
+    Authorization header.
+  sources:
+  - openapi/slab-openapi.yml

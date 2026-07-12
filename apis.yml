@@ -104,6 +104,12 @@ apis:
     API, including the organization entry point that scopes posts, topics, and users.
     API responses are bounded by what the Slab Bot user can access in the workspace.
 common:
+- type: VulnerabilityDisclosure
+  url: security/slab-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/slab-domain-security.yml
+- type: Authentication
+  url: authentication/slab-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/slab
 - type: LinkedIn
@@ -118,6 +124,8 @@ common:
   url: rate-limits/slab-rate-limits.yml
 - type: FinOps
   url: finops/slab-finops.yml
+- url: https://slab.com/blog/
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
