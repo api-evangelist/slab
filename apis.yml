@@ -104,6 +104,8 @@ apis:
     API, including the organization entry point that scopes posts, topics, and users.
     API responses are bounded by what the Slab Bot user can access in the workspace.
 common:
+- type: AgenticAccess
+  url: agentic-access/slab-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/slab-vulnerability-disclosure.yml
 - type: DomainSecurity
