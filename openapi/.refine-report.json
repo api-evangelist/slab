@@ -1,0 +1,14 @@
+{
+  "provider": "slab",
+  "sources": [
+    "slab-graphql-api-openapi.yml"
+  ],
+  "outputs": [
+    "slab-graphql-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
