@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Slab GraphQL API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GraphQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute a Slab GraphQL operation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.slab.com/v1/graphql",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Execute any Slab GraphQL query or mutation. Send a JSON body with a `query` string and optional `variables` object. Supported operations include `post`, `posts`, `search`, `topic`, `topics`, `user`, `users`, and `organization` queries, and the `updatePost` mutation. Content is represented in the Quill Delta format."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,293 @@
+{
+  "item": [
+    {
+      "id": "637af2f1-9074-4848-9cd8-a4e321774e5c",
+      "name": "GraphQL",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "170dc6a3-e243-44c9-8d77-e58387b4f496",
+          "name": "Execute a Slab GraphQL operation.",
+          "request": {
+            "name": "Execute a Slab GraphQL operation.",
+            "description": {
+              "content": "Execute any Slab GraphQL query or mutation. Send a JSON body with a `query` string and optional `variables` object. Supported operations include `post`, `posts`, `search`, `topic`, `topics`, `user`, `users`, and `organization` queries, and the `updatePost` mutation. Content is represented in the Quill Delta format.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "graphql"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<string>\",\n  \"operationName\": \"<string>\",\n  \"variables\": {\n    \"key_0\": 4080\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "71eb63a0-8ec0-462c-aec7-19afcd0a04d3",
+              "name": "A GraphQL response. Note that GraphQL returns HTTP 200 even for operations that produce field-level `errors`; inspect the `errors` array in the body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "graphql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"query GetPost($id: ID!) { post(id: $id) { id title content insertedAt updatedAt topics { id name } } }\",\n  \"variables\": {\n    \"id\": \"abc123\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"key_0\": 8760,\n    \"key_1\": true\n  },\n  \"errors\": [\n    {\n      \"message\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"locations\": [\n        {\n          \"line\": 7765,\n          \"column\": 7316\n        },\n        {\n          \"line\": 4653,\n          \"column\": 150\n        }\n      ]\n    },\n    {\n      \"message\": \"string\",\n      \"path\": [\n        \"string\",\n        \"string\"\n      ],\n      \"locations\": [\n        {\n          \"line\": 2678,\n          \"column\": 1534\n        },\n        {\n          \"line\": 3235,\n          \"column\": 7914\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71fdb4da-f35c-4c53-8762-6d547c20a89d",
+              "name": "Missing or invalid Authorization token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "graphql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"query GetPost($id: ID!) { post(id: $id) { id title content insertedAt updatedAt topics { id name } } }\",\n  \"variables\": {\n    \"id\": \"abc123\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b1983560-48a7-4512-be88-1fe277dd20c2",
+              "name": "Token is valid but the account is not on a Business or Enterprise plan, or the Slab Bot lacks access to the requested content.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "graphql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"query GetPost($id: ID!) { post(id: $id) { id title content insertedAt updatedAt topics { id name } } }\",\n  \"variables\": {\n    \"id\": \"abc123\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a3db6875-f3e6-4552-a2b8-9b89e04e7bae",
+              "name": "Too many requests; the client is being rate limited.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "graphql"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query\": \"query GetPost($id: ID!) { post(id: $id) { id title content insertedAt updatedAt topics { id name } } }\",\n  \"variables\": {\n    \"id\": \"abc123\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.slab.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4cabff65-2983-4a83-8e8c-6e813f4a299b",
+    "name": "Slab GraphQL API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "HTTP transport for the Slab GraphQL API. Slab exposes a single GraphQL endpoint at https://api.slab.com/v1/graphql accessed via HTTP POST with a JSON body containing a `query` and optional `variables`. Authentication uses an `Authorization` token generated in Team Settings -> Developer Tools. The API is available to Business and Enterprise customers and returns only content accessible to the Slab Bot user.\n\nContact Support:\n Name: Slab Support",
+      "type": "text/plain"
+    }
+  }
+}
