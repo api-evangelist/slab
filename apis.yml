@@ -7,6 +7,18 @@ description: Slab is an internal knowledge base and team wiki for the modern wor
   a single GraphQL API at https://api.slab.com/v1/graphql for programmatic access to
   posts, topics, users, and organization data, available to Business and Enterprise
   customers.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
