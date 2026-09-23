@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Slab GraphQL API
+  title: Slab Graph QL API
   description: HTTP transport for the Slab GraphQL API. Slab exposes a single GraphQL endpoint at https://api.slab.com/v1/graphql accessed via HTTP POST with a JSON body containing a `query` and optional `variables`. Authentication uses an `Authorization` token generated in Team Settings -> Developer Tools. The API is available to Business and Enterprise customers and returns only content accessible to the Slab Bot user.
   termsOfService: https://slab.com/terms
   contact:
@@ -10,14 +10,14 @@ info:
 servers:
 - url: https://api.slab.com
 tags:
-- name: GraphQL
+- name: Graph QL
 paths:
   /v1/graphql:
     post:
       operationId: postGraphql
       tags:
-      - GraphQL
-      summary: Execute a Slab GraphQL operation.
+      - Graph QL
+      summary: Execute a Slab GraphQL operation
       description: Execute any Slab GraphQL query or mutation. Send a JSON body with a `query` string and optional `variables` object. Supported operations include `post`, `posts`, `search`, `topic`, `topics`, `user`, `users`, and `organization` queries, and the `updatePost` mutation. Content is represented in the Quill Delta format.
       security:
       - SlabToken: []
@@ -74,6 +74,20 @@ paths:
           description: Too many requests; the client is being rate limited.
 components:
   schemas:
+    GraphQLResponse:
+      type: object
+      properties:
+        data:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+          description: Result data keyed by the requested fields.
+        errors:
+          type: array
+          description: Field- or request-level errors, if any.
+          items:
+            $ref: '#/components/schemas/GraphQLError'
     GraphQLRequest:
       type: object
       required:
@@ -89,19 +103,6 @@ components:
           type: object
           additionalProperties: true
           description: Key/value map of variables referenced by the operation.
-    GraphQLResponse:
-      type: object
-      properties:
-        data:
-          type: object
-          additionalProperties: true
-          nullable: true
-          description: Result data keyed by the requested fields.
-        errors:
-          type: array
-          description: Field- or request-level errors, if any.
-          items:
-            $ref: '#/components/schemas/GraphQLError'
     GraphQLError:
       type: object
       properties:
