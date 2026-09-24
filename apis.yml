@@ -60,8 +60,6 @@ apis:
     url: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
   - type: APIReference
     url: https://studio.apollographql.com/public/Slab/variant/current/schema/reference
-  - type: GraphQL
-    url: graphql/slab-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/slab-agentic-access.yml
