@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Slab Graph QL API
+  title: Slab GraphQL API
   description: HTTP transport for the Slab GraphQL API. Slab exposes a single GraphQL endpoint at https://api.slab.com/v1/graphql accessed via HTTP POST with a JSON body containing a `query` and optional `variables`. Authentication uses an `Authorization` token generated in Team Settings -> Developer Tools. The API is available to Business and Enterprise customers and returns only content accessible to the Slab Bot user.
   termsOfService: https://slab.com/terms
   contact:
@@ -74,35 +74,6 @@ paths:
           description: Too many requests; the client is being rate limited.
 components:
   schemas:
-    GraphQLResponse:
-      type: object
-      properties:
-        data:
-          type:
-          - object
-          - 'null'
-          additionalProperties: true
-          description: Result data keyed by the requested fields.
-        errors:
-          type: array
-          description: Field- or request-level errors, if any.
-          items:
-            $ref: '#/components/schemas/GraphQLError'
-    GraphQLRequest:
-      type: object
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          description: The GraphQL query or mutation document.
-        operationName:
-          type: string
-          description: Name of the operation to run when the document defines several.
-        variables:
-          type: object
-          additionalProperties: true
-          description: Key/value map of variables referenced by the operation.
     GraphQLError:
       type: object
       properties:
@@ -121,6 +92,35 @@ components:
                 type: integer
               column:
                 type: integer
+    GraphQLRequest:
+      type: object
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The GraphQL query or mutation document.
+        operationName:
+          type: string
+          description: Name of the operation to run when the document defines several.
+        variables:
+          type: object
+          additionalProperties: true
+          description: Key/value map of variables referenced by the operation.
+    GraphQLResponse:
+      type: object
+      properties:
+        data:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+          description: Result data keyed by the requested fields.
+        errors:
+          type: array
+          description: Field- or request-level errors, if any.
+          items:
+            $ref: '#/components/schemas/GraphQLError'
   securitySchemes:
     SlabToken:
       type: apiKey
