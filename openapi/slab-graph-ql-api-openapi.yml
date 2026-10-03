@@ -92,6 +92,20 @@ components:
                 type: integer
               column:
                 type: integer
+    GraphQLResponse:
+      type: object
+      properties:
+        data:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
+          description: Result data keyed by the requested fields.
+        errors:
+          type: array
+          description: Field- or request-level errors, if any.
+          items:
+            $ref: '#/components/schemas/GraphQLError'
     GraphQLRequest:
       type: object
       required:
@@ -107,20 +121,6 @@ components:
           type: object
           additionalProperties: true
           description: Key/value map of variables referenced by the operation.
-    GraphQLResponse:
-      type: object
-      properties:
-        data:
-          type:
-          - object
-          - 'null'
-          additionalProperties: true
-          description: Result data keyed by the requested fields.
-        errors:
-          type: array
-          description: Field- or request-level errors, if any.
-          items:
-            $ref: '#/components/schemas/GraphQLError'
   securitySchemes:
     SlabToken:
       type: apiKey
