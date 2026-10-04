@@ -40,6 +40,7 @@ tags:
 - Documentation
 - Collaboration
 - GraphQL
+- Knowledge Management
 created: '2026-06-21'
 modified: '2026-06-21'
 specificationVersion: '0.23'
@@ -50,6 +51,8 @@ apis:
   humanURL: https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks
   baseURL: https://api.slab.com/v1/graphql
   tags:
+  - GraphQL
+  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI
