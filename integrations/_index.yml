@@ -40,7 +40,7 @@
     - connectors/applications/slab
     vendor_link: https://slab.com/
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
 - slug: slab-microsoft-teams-own
   label: Microsoft Teams (own)
