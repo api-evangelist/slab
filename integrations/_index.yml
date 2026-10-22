@@ -16,6 +16,32 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: slab-microsoft-teams-own
+  label: Microsoft Teams (own)
+  partner: microsoft-teams
+  partner_name: Microsoft Teams (own)
+  category: Microsoft Teams app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appsource.microsoft.com/en-us/product/office/WA200004212
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: slab-slack-own
+  label: Slack (own)
+  partner: slack
+  partner_name: Slack (own)
+  category: Slack app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://slack.com/marketplace/A4TSF7SR5-slab
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
 - slug: slab-fivetran
   label: Fivetran
   partner: fivetran
@@ -42,28 +68,15 @@
     builder: Fivetran
   status: not-a-workflow
   arazzo: null
-- slug: slab-microsoft-teams-own
-  label: Microsoft Teams (own)
-  partner: microsoft-teams
-  partner_name: Microsoft Teams (own)
-  category: Microsoft Teams app
+- slug: slab-miro-own
+  label: Miro (own)
+  partner: miro
+  partner_name: Miro (own)
+  category: Miro app
   type: marketplace
   marketplace: own
   channel: partner-built
-  evidence: https://appsource.microsoft.com/en-us/product/office/WA200004212
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
-- slug: slab-slack-own
-  label: Slack (own)
-  partner: slack
-  partner_name: Slack (own)
-  category: Slack app
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://slack.com/marketplace/A4TSF7SR5-slab
+  evidence: https://miro.com/marketplace/slab/
   source: edge
   relationship: platform-app
   status: not-a-workflow
