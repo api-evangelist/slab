@@ -1,4 +1,4 @@
-# Slab (slab)
+# Slab
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,122 +66,123 @@
 
 Slab is an internal knowledge base and team wiki for the modern workplace, pairing a clean editor and fast search with dozens of integrations. Slab exposes a single GraphQL API at https://api.slab.com/v1/graphql for programmatic access to posts, topics, users, and organization data, available to Business and Enterprise customers.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/slab/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/slab/refs/heads/main/apis.yml)
+**Areas:** Knowledge Base · Wiki · Documentation · Collaboration · GraphQL · Knowledge Management
 
-## Tags
+## Slab on APIs.io
 
-- Knowledge Base
-- Wiki
-- Documentation
-- Collaboration
-- GraphQL
+Everything profiled for Slab is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/slab/](https://apis.io/providers/slab/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (1)
 
-- **Created:** 2026-06-21
-- **Modified:** 2026-06-21
+- [Slab Graph QL API](https://apis.io/apis/slab/slab-graph-ql-api/) — The Graph QL API from Slab — 1 operation(s) for graph ql.
 
-## APIs
+### Published properties
 
-### Slab Posts
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Query and update knowledge base posts through the Slab GraphQL API - fetch a post by ID, search posts across the workspace with cursor-based pagination, list posts within a topic or across the organization, and update post content using the Quill Delta rich-text format.
+#### GraphQL (1)
 
-- **Human URL:** [https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks](https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks)
-- **Base URL:** `https://api.slab.com/v1/graphql`
+GraphQL schemas.
 
-#### Tags
+- [Moved to /providers/slab/](https://apis.io/graphqls/slab/slab-graphql/)
 
-- Posts
-- Content
-- GraphQL
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks)
-- [API Reference](https://studio.apollographql.com/public/Slab/variant/current/schema/reference)
-- [GraphQL](graphql/slab-graphql.md) — [GraphQL Schema](https://spec.graphql.org/)
-- [OpenAPI](openapi/slab-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/slab.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/slab.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Slab Agentic Access](https://apis.io/agentic-access/slab/slab-agentic-access/)
 
-### Slab Topics
+#### Collections (2)
 
-Read the topic hierarchy used to organize content in a Slab workspace, resolve a topic by ID, and list the posts nested within a topic. Topics are the primary structure for grouping and navigating knowledge base content.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks](https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks)
-- **Base URL:** `https://api.slab.com/v1/graphql`
+- [Slab GraphQL API](https://apis.io/collections/slab/open-slab/)
+- [Slab GraphQL API](https://apis.io/collections/slab/open-slab-graphql-api/)
 
-#### Tags
+#### Security (3)
 
-- Topics
-- Organization
-- GraphQL
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Slab Authentication](https://apis.io/security/slab/slab-authentication/)
+- [Slab Domain Security](https://apis.io/security/slab/slab-domain-security/)
+- [Slab Vulnerability Disclosure](https://apis.io/security/slab/slab-vulnerability-disclosure/)
 
-- [Documentation](https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks)
-- [API Reference](https://studio.apollographql.com/public/Slab/variant/current/schema/reference)
-- [GraphQL](graphql/slab-graphql.md) — [GraphQL Schema](https://spec.graphql.org/)
-- [OpenAPI](openapi/slab-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/slab.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/slab.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### Slab Users
+Published plans, tiers and prices.
 
-Resolve the members of a Slab organization through the GraphQL API - look up a user by ID and read profile fields such as name and email, used to attribute authorship and map activity to people.
+- [Slab Plans Pricing](https://apis.io/plans/slab/slab-plans-pricing/)
 
-- **Human URL:** [https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks](https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks)
-- **Base URL:** `https://api.slab.com/v1/graphql`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Users
-- Members
-- GraphQL
+- [Slab Rate Limits](https://apis.io/rate-limits/slab/slab-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks)
-- [API Reference](https://studio.apollographql.com/public/Slab/variant/current/schema/reference)
-- [GraphQL](graphql/slab-graphql.md) — [GraphQL Schema](https://spec.graphql.org/)
-- [OpenAPI](openapi/slab-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/slab.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/slab.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### Slab Organization
+- [Slab Finops](https://apis.io/finops/slab/slab-finops/)
 
-Read top-level organization (workspace) context through the Slab GraphQL API, including the organization entry point that scopes posts, topics, and users. API responses are bounded by what the Slab Bot user can access in the workspace.
+## Where to find this API
 
-- **Human URL:** [https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks](https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks)
-- **Base URL:** `https://api.slab.com/v1/graphql`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Organization
-- Account
-- GraphQL
-
-#### Properties
-
-- [Documentation](https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks)
-- [API Reference](https://studio.apollographql.com/public/Slab/variant/current/schema/reference)
-- [GraphQL](graphql/slab-graphql.md) — [GraphQL Schema](https://spec.graphql.org/)
-- [OpenAPI](openapi/slab-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/slab.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/slab.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/slab)
-- [LinkedIn](https://www.linkedin.com/company/slab-inc)
 - [Website](https://slab.com/)
 - [Documentation](https://help.slab.com/en/articles/6545629-developer-tools-api-webhooks)
-- [Plans](plans/slab-plans-pricing.yml)
-- [Rate Limits](rate-limits/slab-rate-limits.yml)
-- [Fin Ops](finops/slab-finops.yml)
+- [Blog](https://slab.com/blog/)
+- [GitHub](https://github.com/slab)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 26.8** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 52.7 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 7.9 |
+
+**Agent readiness 22.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 17.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/slab/](https://apis.io/providers/slab/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Slab: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/slab/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
